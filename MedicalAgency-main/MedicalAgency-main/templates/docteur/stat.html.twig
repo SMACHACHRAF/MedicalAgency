@@ -1,0 +1,149 @@
+{% extends 'doctornavbar.html.twig' %}
+
+{% block title %}Pending Reports{% endblock %}
+
+{% block test %}
+    <script
+            src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <div class="sidebar">
+ <div class="scrollbar-inner sidebar-wrapper">
+            <div class="user">
+                <div class="photo">
+                    <img src="{{ asset('icons/doctor.png') }}" alt="Symfony" />
+                </div>
+                <div class="info">
+                    <a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+                        <span>
+                        {{username}}
+                        <span class="user-level">Doctor</span>
+                        </span>
+                    </a>
+                    <div class="clearfix"></div>
+
+
+                </div>
+            </div>
+            <ul class="nav">
+                <li class="nav-item active">
+                    <a href="#dash" data-toggle="collapse" aria-expanded="false">
+                        <i class="la la-dashboard"></i>
+                        <p>Dashboard</p>
+                        <span class="caret"></span>
+
+                    </a>
+                </li>
+                <ul class="collapse navigation-submenu" id="dash">
+                    <li>
+                        <a class="breadcrumb-item active" href="{{ path('stat_doc') }}" >Stats</a>
+
+                    </li>
+                    <br>
+
+                </ul>
+                <li class="nav-item  ">
+                    <a href="#req_man" data-toggle="collapse" aria-expanded="false">
+                        <svg class="bi bi-folder-check" width="2.8em" height="2em" viewBox="0 0 24 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
+                            <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
+                            <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                        </svg>
+                        <p>Reports</p>
+                        <span class="caret"></span>
+                    </a>
+                </li>
+                <ul class="collapse navigation-submenu" id="req_man">
+                    <li>
+                        <a   href="{{ path('pending_reports') }}" >Pending Reports</a>
+                    </li>
+                    <br>
+                    <li>
+                        <a  href="{{ path('history_reports') }}" >Completed Reports</a>
+                    </li>
+                    <br>
+
+                </ul>
+
+            </ul>
+        </div>
+    </div>
+    <div class="main-panel">
+        <div class="content">
+            <div class="container-fluid">
+
+                <div class="container">
+                    <h3>Reports Stats</h3>
+                    <h8>PS: The total of patients is {{ all }}</h8>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6"><canvas id="pending"></canvas></div>
+                        <div class="col-md-6"><canvas id="history"></canvas></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {% block script %}
+        <script>
+            var his= '{{ history }}';
+            var pending = '{{ pending }}';
+            var all = '{{ all }}';
+
+            $(document).ready(function () {
+
+                var ctx = document.getElementById('history').getContext('2d');
+                var chart = new Chart(ctx, {
+                    // The type of chart we want to create
+                    type: 'pie',
+
+                    // The data for our dataset
+                    data: {
+                        labels: ['Completed Reports %', 'All %'],
+                        datasets: [{
+                            label: 'Completed Reports',
+                            backgroundColor: ['#004c6d', '#a7cfe9'],
+                            data: [Math.round(his), 100-Math.round(his)]
+                        }]
+                    },
+
+                    // Configuration options go here
+
+                    options: {}
+                });
+
+
+                var ctx = document.getElementById('pending').getContext('2d');
+                var chart = new Chart(ctx, {
+                    // The type of chart we want to create
+                    type: 'pie',
+
+                    // The data for our dataset
+                    data: {
+                        labels: ['Pending Reports %', 'All %'],
+                        datasets: [{
+                            label: 'Pending Reports',
+                            backgroundColor: ['#004c6d', '#a7cfe9'],
+                            data: [Math.round(pending), 100-Math.round(pending)]
+                        }]
+                    },
+
+                    // Configuration options go here
+                    options: {}
+                });
+
+
+
+
+
+            });
+
+        </script>
+    {% endblock %}
+
+{% endblock %}
+

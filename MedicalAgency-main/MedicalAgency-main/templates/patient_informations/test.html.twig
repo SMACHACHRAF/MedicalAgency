@@ -1,0 +1,25 @@
+{% extends 'emailtemp.html.twig' %}
+{% block title %}Medical Informations{% endblock %}
+
+{% block test %}
+
+    <h2>Medical Informations</h2>
+
+    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;"> Hello {{ name }},</p>
+    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;"> Your Invocie is ready</p>
+    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Click on the attatchement to see your invoice, then click on the link below to confirm it.</p>
+    <p> <a href="{{'http://localhost:8000/confirmation/patient/'~id}}">Click here to send us your medical informations</a></p>
+    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;" >Looking forward to hearing from you, sincere greetings</p>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

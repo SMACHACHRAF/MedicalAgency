@@ -1,0 +1,76 @@
+
+{% extends 'headertemp.html.twig' %}
+
+{% block request %}
+
+    <div class="contact1">
+        <div class="container-contact1">
+            <div class="contact1-pic js-tilt" data-tilt>
+                <img src="{{ asset('icons/medical.jpg') }}" alt="IMG" >
+            </div>
+
+            <div class="contact1-form validate-form" id="form">
+            <span class="contact1-form-title">
+                        Request Form
+            </span>
+                <div>
+                {% set formErrors = requestForm.vars.errors.form.getErrors(true) %}
+
+                {# If there are errors in the form, display them in this unorganized list #}
+                {% if formErrors|length %}
+                    <ul>
+                        {% for error in formErrors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error.message }}
+                        </div>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                </div>
+                {{ form_start(requestForm,{'attr':{'novalidate':'novalidate'}}) }}
+
+                <br>
+
+                    {{ form_widget(requestForm.Name , { 'attr': {'class': 'input1' , 'placeholder' :'Name' } }) }}
+                <br>
+
+
+                <div class="form-group">
+                    {{ form_widget(requestForm.country , { 'attr': { 'placeholder' :'Select Your Country'}  }) }}
+                </div>
+                <br>
+                {{ form_widget(requestForm.phone, { 'attr': {'class': 'input1' , 'placeholder' :'Phone' } }) }}
+
+                <br>
+
+
+
+                {{ form_widget(requestForm.email, { 'attr': {'class': 'input1' , 'placeholder' :'Email' } }) }}
+                <br>
+
+                <div class="form-group">
+                    {{ form_widget(requestForm.specialisation , { 'attr': {'class': 'country' }  }) }}
+                    <br>
+                </div>
+
+                {{ form_widget(requestForm.demande, { 'attr': {'class': 'input1' , 'placeholder' :'Message' } }) }}
+                <br>
+
+                {{ form_widget(requestForm.Send, {  'attr': {'class':'contact1-form-btn'} }) }}
+
+                {{  form_end(requestForm) }}
+
+
+
+        </div>
+
+
+
+
+        </div>
+    </div>
+    </div>
+
+
+{% endblock %}
+

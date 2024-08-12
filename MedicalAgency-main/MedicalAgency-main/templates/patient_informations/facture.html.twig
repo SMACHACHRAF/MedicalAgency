@@ -1,0 +1,272 @@
+{% block title %}
+
+<title>Example 1</title>
+{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    .clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+    }
+
+    a {
+    color: #5D6975;
+    text-decoration: underline;
+    }
+
+    body {
+    position: relative;
+    width: 21cm;
+    height: 29.7cm;
+    margin: 0 auto;
+    color: #001028;
+    background: #FFFFFF;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-family: Arial;
+    }
+
+    header {
+    padding: 10px 0;
+    margin-bottom: 30px;
+    }
+
+    #logo {
+    text-align: center;
+    margin-bottom: 10px;
+    }
+
+    #logo img {
+    width: 90px;
+    }
+
+
+    h1 {
+    border-top: 1px solid  #5D6975;
+    border-bottom: 1px solid  #5D6975;
+    color: #5D6975;
+    font-size: 2.4em;
+    line-height: 1.4em;
+    font-weight: normal;
+    text-align: center;
+    margin: 0 0 20px 0;
+    }
+
+    #project {
+    float: left;
+    }
+
+    #project span {
+    color: #5D6975;
+    text-align: right;
+    width: 52px;
+    margin-right: 10px;
+    display: inline-block;
+    font-size: 0.8em;
+    }
+
+    #company {
+    text-align: right;
+    }
+
+    #project div,
+    #company div {
+    white-space: nowrap;
+    }
+
+    table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 20px;
+    }
+
+    table tr:nth-child(2n-1) td {
+    background: #F5F5F5;
+    }
+
+    table th,
+    table td {
+    text-align: center;
+    }
+
+    table th {
+    padding: 5px 20px;
+    color: #5D6975;
+    border-bottom: 1px solid #C1CED9;
+    white-space: nowrap;
+    font-weight: normal;
+    }
+
+    table .service,
+    table .desc {
+    text-align: left;
+    }
+
+    table td {
+    padding: 20px;
+    text-align: right;
+    }
+
+    table td.service,
+    table td.desc {
+    vertical-align: top;
+    }
+
+    table td.unit,
+    table td.qty,
+    table td.total {
+    font-size: 1.2em;
+    }
+
+    table td.grand {
+    border-top: 1px solid #5D6975;;
+    }
+
+    #notices .notice {
+    color: #5D6975;
+    font-size: 1.2em;
+    }
+
+    footer {
+    color: #5D6975;
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    bottom: 0;
+    border-top: 1px solid #C1CED9;
+    padding: 8px 0;
+    text-align: center;
+    }
+
+    body {
+        height: 842px;
+        width: 595px;
+        /* to centre page on screen*/
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .img_container{
+        margin-left:280px;
+        width:50px;
+    }
+    </style>
+
+{% endblock  %}
+
+
+{% block main %}
+
+    </head>
+    <body>
+    <header class="clearfix">
+        <div id="logo">
+            <div class="img_container">
+
+            <i class="fa fa-heartbeat" style="font-size:48px;color:red"></i>
+            </div>
+
+        </div>
+        <h1>INVOICE</h1>
+        <div id="company" class="clearfix">
+           <div>{{date|date('F jS Y')}}</div>
+            <div>Private Univerity Of Sousse</div>
+            <div>Sousse,<br /> Code POSTALE 4000, TN</div>
+            <div><a href="mailto:company@example.com">medicalagency007@gmail.com</a></div>
+        </div>
+        <div id="project">
+            <div><span>Facture N"</span> {{ data.id }}</div>
+            <div><span>Service</span> Treatment Process</div>
+            <div><span>CLIENT</span> {{data.Name}}</div>
+            <div><span>ADDRESS</span> {{ data.Country }}</div>
+            <div><span>EMAIL</span> <a href="{{data.email}}">{{data.email}}</a></div>
+            <div><span>ARRIVAL DATE</span> {{form.date|date('F jS Y')}}</div>
+        </div>
+    </header>
+    <main>
+        <table>
+            <thead>
+            <tr>
+                <th class="service">SERVICE</th>
+                <th class="desc">DESCRIPTION</th>
+                <th>PRICE</th>
+                <th>QTY</th>
+                <th>TOTAL</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="service">Medical Operation </td>
+                <td class="desc">{{ data.specialisation }}</td>
+                <td class="unit">{{ form.MedicalOperationCost}} $</td>
+                <td class="qty">-</td>
+                <td class="total">{{ form.MedicalOperationCost}} $</td>
+            </tr>
+            <tr>
+                <td class="service">Flight Ticket </td>
+                <td class="desc">Flight Ticket (round-ticket) </td>
+                <td class="unit">{{ form.FlightTicket}} $</td>
+                <td class="qty">-</td>
+                <td class="total">{{ form.FlightTicket}} $</td>
+
+            </tr>
+            {% if  data.housing != "I am in charge" %}
+
+            <tr>
+                <td class="service">Housing</td>
+                <td class="desc">{{ data.housing }}</td>
+                <td class="unit">{{ form.housingCost }} $</td>
+                <td class="qty">{{ data.tourismeRegion.EstimatePeriod }} DAYS </td>
+                <td class="total">{{ form.housingCost * data.tourismeRegion.EstimatePeriod }} $</td>
+            </tr>
+            {% endif %}
+
+            {% if   data.tourismeRegion.Car == true  %}
+
+            <tr>
+                <td class="service">Car</td>
+                <td class="desc">Car Cost</td>
+                <td class="unit">{{ form.carCost }} $ </td>
+                <td class="qty">-</td>
+                <td class="total">{{ form.carCost }} $</td>
+            </tr>
+
+            {% endif %}
+
+
+            {% if   data.tourismeRegion.Guide == true  %}
+
+                <tr>
+                    <td class="service">Guide</td>
+                    <td class="desc">Guide Cost</td>
+                    <td class="unit">{{ form.guideCost }} $ </td>
+                    <td class="qty">-</td>
+                    <td class="total">{{ form.guideCost }} $ </td>
+                </tr>
+
+            {% endif %}
+
+
+
+            <tr>
+                <td colspan="4">TOTAL</td>
+                <td class="total">{{form.Somme}} $</td>
+            </tr>
+
+
+            </tbody>
+        </table>
+        <div id="notices">
+            <div>NOTICE:</div>
+            <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+        </div>
+    </main>
+    <footer>
+        Invoice was created on a computer and is valid without the signature and seal.
+    </footer>
+    </body>
+    </html>
+{% endblock  %}

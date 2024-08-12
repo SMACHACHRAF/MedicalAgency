@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Show Patient Informations{% endblock %}
+
+{% block body %}
+    <h1>PatientInformations</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ patient_information.id }}</td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <td>{{ patient_information.Name }}</td>
+        </tr>
+        <tr>
+            <th>Age</th>
+            <td>{{ patient_information.Age }}</td>
+        </tr>
+        <tr>
+            <th>Sexe</th>
+            <td>{{ patient_information.Sexe ? 'Men' : 'Women' }}</td>
+        </tr>
+        <tr>
+            <th>Country</th>
+            <td>{{ patient_information.country }}</td>
+        </tr>
+        <tr>
+            <th>Phone</th>
+            <td>{{ patient_information.phone }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ patient_information.email }}</td>
+        </tr>
+        <tr>
+            <th>Demande</th>
+            <td>{{ patient_information.demande }}</td>
+        </tr>
+        <tr>
+            <th>Specialisation</th>
+            <td>{{ patient_information.specialisation }}</td>
+        </tr>
+        <tr>
+            <th>Arrival Date</th>
+            <td>{{ patient_information.TourismeRegion.Arrivaldate|date('Y-m-d')}}</td>
+        </tr>
+        <tr>
+            <th>Housing</th>
+            <td>{{ patient_information.Housing.Place}}</td>
+        </tr>
+        <tr>
+            <th>Medical City</th>
+            <td>{{ patient_information.TourismeRegion.MedicalCity}}</td>
+        </tr>
+        <tr>
+            <th>Guide</th>
+            <td>{{ patient_information.TourismeRegion.Guide ? 'With Guide' : 'Without Guide' }}</td>
+        </tr>
+        <tr>
+            <th>Car</th>
+            <td>{{ patient_information.TourismeRegion.Car ? 'With Car' : 'Without Car' }}</td>
+        </tr>
+        <tr>
+            <th>Estimate Period</th>
+            <td>{{ patient_information.TourismeRegion.estimateperiod }}</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+    <a href="{{ path('pending_reports') }}">back to list</a>
+
+{% endblock %}

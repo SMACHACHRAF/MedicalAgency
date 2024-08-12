@@ -1,0 +1,131 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% block css %}
+    <style>
+        .site-footer
+        {
+            background-color:#26272b;
+            padding:45px 0 20px;
+            font-size:15px;
+            line-height:24px;
+            color:#737373;
+        }
+
+    </style>
+{% endblock %}
+{% block body %}
+            <nav  class="navbar navbar-expand-lg navbar-light bg-light" >
+            <a class="navbar-brand" href="{{ path('homepage') }}"><img src="{{ asset('medicalcenter/assets/img/logo/logo.png') }}" alt="image"></a>        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('homepage') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('about') }}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('department') }}">Department</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('contact') }}">Contact</a>
+                    </li>
+
+
+
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    <br>
+    <br>
+    {% if patient_information.PatientNotConfirmed == true  %}
+        <div class="container">
+        <div class="alert alert-primary" role="alert">
+            You have already refused your invoice thank you!
+        </div>
+        </div>
+    {% elseif patient_information.PatientConfirmed == true  %}
+        <div class="container">
+        <div class="alert alert-success" role="alert">
+            You have already accepted your invoice thank you!
+        </div>
+        </div>
+
+        {% else%}
+
+            <br><br>
+        <div class="container">
+            <div class="row justify-content-center">
+                    <div class="col-6">
+
+                        <h1>Invoice Confirmation </h1>
+                    <span>We would like to know your decisions to accept or refuse the invoice</span>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+                <div class="col-6">
+                    <div><a class="btn btn-success" href="{{ path('patient_confirmed', {'id': patient_information.id})  }}" role="button">Accept Invoice</a></div>
+                    <br>
+                    <br>
+                    <div><a class="btn btn-secondary" href="{{ path('patient_not_confirmed', {'id': patient_information.id}) }}" role="button">Refuse Invoice</a></div>
+                </div>
+            </div>
+
+
+            </div>
+
+
+
+
+        <br>
+        <br>
+        </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br> <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+    <!-- Site footer -->
+        <footer class="site-footer">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-8 col-sm-6 col-xs-12">
+                        <p>
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved  <a href="https://www.ups.ens.tn" >Private Univerity Of Sousse</a>
+
+                        </p>
+                    </div>
+
+                </div>
+        </footer>
+    {% endif  %}
+
+    {% endblock %}
+
+
+

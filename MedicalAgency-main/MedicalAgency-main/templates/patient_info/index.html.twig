@@ -1,0 +1,141 @@
+{% form_theme PatientInfo 'bootstrap_4_layout.html.twig' %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% block css %}
+    <style>
+        .site-footer {
+            background-color: #26272b;
+            padding: 45px 0 20px;
+            font-size: 15px;
+            line-height: 24px;
+            color: #737373;
+        }
+
+    </style>
+{% endblock %}
+{% block body %}
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                crossorigin="anonymous"></script>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{{ path('homepage') }}"><img
+                        src="{{ asset('medicalcenter/assets/img/logo/logo.png') }}" alt="image"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('homepage') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('about') }}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('department') }}">Department</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('contact') }}">Contact</a>
+                    </li>
+
+
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+        <div class="container mt-4">
+            {% if PatientInfo.vars['value'].emailComfired %}
+            <div class="container">
+                <div class="alert alert-primary" role="alert">
+                    The Link is no longer available, thank you!
+                </div>
+            </div>
+
+            {% else %}
+            <h1>Patient Informations </h1>
+            <div>
+                {% set formErrors = PatientInfo.vars.errors.form.getErrors(true) %}
+
+                {# If there are errors in the form, display them in this unorganized list #}
+                {% if formErrors|length %}
+                    <ul>
+                        {% for error in formErrors %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ error.message }}
+                            </div>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            {{ form_start(PatientInfo) }}
+            <div class="row">
+                <div class="col-md-6">{{ form_row(PatientInfo.Age) }}</div>
+                <div class="col-md-6">{{ form_row(PatientInfo.Sexe, { 'attr': { 'placeholder' :'Gender' } }) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">{{ form_row(PatientInfo.tourismeRegion.Arrival_date, { 'attr': { 'min' : "now"|date("d-m-Y") } }) }}</div>
+                <div class="col-md-6">{{ form_row(PatientInfo.tourismeRegion.estimate_period) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">{{ form_row(PatientInfo.tourismeRegion.Guide) }}</div>
+                <div class="col-md-6">{{ form_row(PatientInfo.tourismeRegion.Car) }}</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">{{ form_row(PatientInfo.housing) }}</div>
+                <div class="col-md-6">{{ form_row(PatientInfo.tourismeRegion.medicalCity) }}</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6"> {{ form_row(PatientInfo.Send , { 'attr': { 'data-toggle': 'modal', 'data-target' : '#exampleModal'} }) }}</div>
+            </div>
+            {{ form_widget(PatientInfo) }}
+        </div>
+
+        {{ form_end(PatientInfo) }}
+
+        <br>
+        <br>
+        </div>
+
+        <!-- Site footer -->
+        <footer class="site-footer">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-8 col-sm-6 col-xs-12">
+                    <p>
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved  <a href="https://www.ups.ens.tn" >Private Univerity Of Sousse</a>
+                    </p>
+                    </div>
+
+                </div>
+        </footer>
+
+
+    {% endif %}
+{% endblock %}
+
+
+<script>
+    $("#patient_info2_tourismeRegion_Arrival_date").change(
+        function() {
+            if (new Date(this.value) < new Date()){
+                alert("Error date")
+                this.value=new Date();
+            }
+
+        }
+    );
+
+
+</script>

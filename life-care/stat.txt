@@ -1,0 +1,69 @@
+ /**
+     *
+     * @Route("/stat", name="stat", methods={"GET"})
+     */
+    function stat(Request $request, PatientInformationsRepository $patientInformationsRepository, MedicalFilesRepository $repository, SpecialisationRepository $spec, UsersRepository $usersRepository)
+    {
+         $docteur = $this->getUser();
+        $all = $patientInformationsRepository->findAll();
+
+        $approved = $patientInformationsRepository->findBy(['isApproved' => true]);
+        $rejected = $patientInformationsRepository->findBy(['isRejected' => true]);
+        $pending = $patientInformationsRepository->findBy(['isRejected' => false, 'isApproved' => false]);
+
+        dump(count($all));
+        dump(count($approved));
+        dump(count($rejected));
+        dump("approved");
+        dump(count($approved) * 100 / count($all));
+        dump("rejected");
+        dump(count($rejected) * 100 / count($all));
+        dump("Pending");
+        dump(count($pending) * 100 / count($all));
+        foreach ($spec->findAll() as $value) {
+            dump($value);
+            dump(count($usersRepository->findBy(['Spec' => $value])));
+        }
+        dump($spec->findAll());
+
+
+        return $this->render('patient_informations/stat.html.twig', [
+            'patient_informations' => $patientInformationsRepository->findBy(['isApproved' => 0, 'isRejected' => 0]),
+            'username' => $docteur->getUsername(),
+            'email' => $docteur->getEmail(),
+        ]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+                        <svg lass="bi bi-person" width="2.8em" height="2em" viewBox="0 0 24 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M0 2A1.5 1.5 0 0 1 1.5.5h11A1.5 1.5 0 0 1 14 2v12a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 0 14V2zm1.5-.5A.5.5 0 0 0 1 2v12a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5V2a.5.5 0 0 0-.5-.5h-11z"/>
+                            <path fill-rule="evenodd" d="M15.5 3a.5.5 0 0 1 .5.5V14a1.5 1.5 0 0 1-1.5 1.5h-3v-1h3a.5.5 0 0 0 .5-.5V3.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M2 3h10v2H2V3zm0 3h4v3H2V6zm0 4h4v1H2v-1zm0 2h4v1H2v-1zm5-6h2v1H7V6zm3 0h2v1h-2V6zM7 8h2v1H7V8zm3 0h2v1h-2V8zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1z"/>
+                        </svg>18:28 17/07/2020
+
+
+
+
+
+  <svg class="bi bi-person" width="2.8em" height="2em" viewBox="0 0 24 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 00.014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 00.022.004zm9.974.056v-.002.002zM8 7a2 2 0 100-4 2 2 0 000 4zm3-2a3 3 0 11-6 0 3 3 0 016 0z" clip-rule="evenodd"/>
+                        </svg>
+                        </svg>
+
+
+
+
+
+
+
+
+

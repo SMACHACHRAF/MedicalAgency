@@ -1,0 +1,7 @@
+{% block body %}
+    {% if  is_granted('ROLE_ADMIN') %}
+        <script>window.location.href = 'http://localhost:8000/admin/patient/informations/stat'</script>
+    {% elseif is_granted('ROLE_DOCTOR')  %}
+        <script>window.location.href = 'http://localhost:8000/doctor/statdocteur'</script>
+    {% endif %}
+{% endblock %}

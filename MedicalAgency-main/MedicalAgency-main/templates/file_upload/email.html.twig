@@ -1,0 +1,23 @@
+{% extends 'emailtemp.html.twig' %}
+{% block test %}
+
+    <h2>Medical Informations</h2>
+
+    <p> Hello {{ name }},</p>
+    <p> Your request is on progress</p>
+    <p>Click on the link below to send us your medical informations</p>
+    <p><a href="{{'http://localhost:8000/file/upload/'~email~'/'~id}}">Click here to send us your medical informations</a></p>
+    <p>Looking forward to hearing from you, sincere greetings</p>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

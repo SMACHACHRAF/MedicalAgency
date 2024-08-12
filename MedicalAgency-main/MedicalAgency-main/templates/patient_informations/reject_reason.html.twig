@@ -1,0 +1,169 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% extends 'navbar.html.twig' %}
+{% block title %} Reject Reason {% endblock %}
+{% block css %}
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+{% endblock %}
+{% block JS %}
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block test %}
+
+    <div class="sidebar">
+
+        <div class="scrollbar-inner sidebar-wrapper">
+            <div class="user">
+                <div class="photo">
+                    <img src=" {{asset('icons/admin.png ') }}">
+                </div>
+                <div class="info">
+                    <a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+                        <span>
+                        {{username}}
+                        <span class="user-level">Administrator</span>
+                        <span class="caret"></span>
+                        </span>
+                    </a>
+                    <div class="clearfix"></div>
+
+                    <div class="collapse in" id="collapseExample" aria-expanded="true" style="">
+                        <ul class="nav">
+                            <li>
+                                <a href="#profile">
+                                    <span class="link-collapse">My Profile</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#edit">
+                                    <span class="link-collapse">Edit Profile</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#settings">
+                                    <span class="link-collapse">Settings</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a href="#dash" data-toggle="collapse" aria-expanded="false">
+                        <i class="la la-dashboard"></i>
+                        <p>Dashboard</p>
+                        <span class="caret"></span>
+
+                    </a>
+                </li>
+                <ul class="collapse navigation-submenu" id="dash">
+                    <li>
+                        <a class="breadcrumb-item" href="{{ path('stat') }}" >Stats</a>
+                    </li>
+                    <br>
+                </ul>
+                <li class="nav-item  active">
+                    <a href="#req_man" data-toggle="collapse" aria-expanded="false">
+                        <svg class="bi bi-inbox-fill" width="2.8em" height="2em" viewBox="0 0 24 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M3.81 4.063A1.5 1.5 0 014.98 3.5h6.04a1.5 1.5 0 011.17.563l3.7 4.625a.5.5 0 01-.78.624l-3.7-4.624a.5.5 0 00-.39-.188H4.98a.5.5 0 00-.39.188L.89 9.312a.5.5 0 11-.78-.624l3.7-4.625z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M.125 8.67A.5.5 0 01.5 8.5H6a.5.5 0 01.5.5 1.5 1.5 0 003 0 .5.5 0 01.5-.5h5.5a.5.5 0 01.496.562l-.39 3.124a1.5 1.5 0 01-1.489 1.314H1.883a1.5 1.5 0 01-1.489-1.314l-.39-3.124a.5.5 0 01.121-.393zm.941.83l.32 2.562a.5.5 0 00.497.438h12.234a.5.5 0 00.496-.438l.32-2.562H10.45a2.5 2.5 0 01-4.9 0H1.066z" clip-rule="evenodd"/>
+
+                        </svg>
+                        <p>Requests</p>
+                        <span class="caret"></span>
+                    </a>
+                </li>
+                <ul class="collapse navigation-submenu" id="req_man">
+                    <li>
+                        <a class="breadcrumb-item active"  href="{{ path('patient_informations_index') }}" >Pending Requests</a>
+                    </li>
+                    <br>
+                    <li>
+                        <a  href="{{ path('patient_informations_approved') }}" >Approved Requests</a>
+                    </li>
+                    <br>
+                    <li>
+                        <a class="" href="{{ path('patient_informations_rejected') }}" >Rejected Requests</a>
+                    </li>
+                    <br>
+                </ul>
+                <li class="nav-item ">
+                    <a href="#files_man" data-toggle="collapse" aria-expanded="false">
+                        <svg class="bi bi-folder-check" width="2.8em" height="2em" viewBox="0 0 24 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M9.828 4H2.19a1 1 0 00-.996 1.09l.637 7a1 1 0 00.995.91H9v1H2.826a2 2 0 01-1.991-1.819l-.637-7a1.99 1.99 0 01.342-1.31L.5 3a2 2 0 012-2h3.672a2 2 0 011.414.586l.828.828A2 2 0 009.828 3h3.982a2 2 0 011.992 2.181L15.546 8H14.54l.265-2.91A1 1 0 0013.81 4H9.828zm-2.95-1.707L7.587 3H2.19c-.24 0-.47.042-.684.12L1.5 2.98a1 1 0 011-.98h3.672a1 1 0 01.707.293z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M15.854 10.146a.5.5 0 010 .708l-3 3a.5.5 0 01-.708 0l-1.5-1.5a.5.5 0 01.708-.708l1.146 1.147 2.646-2.647a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <p>Manage Files</p>
+                        <span class="caret"></span>
+                    </a>
+                </li>
+                <ul class="collapse navigation-submenu" id="files_man">
+                    <li>
+                        <a  href="{{  path('medical_files_index') }}"  >Pending Files</a>
+                    </li>
+                    <br>
+                    <li>
+                        <a href="{{  path('medical_files_accepted') }} "  >Approved Files</a>
+                    </li>
+                    <br>
+                    <li>
+                        <a href="{{  path('medical_files_rejected') }} " >Rejected Files</a>
+                    </li>
+                    <br>
+                </ul>
+
+                <li class="nav-item">
+                    <a href="#acc" data-toggle="collapse" aria-expanded="false">
+                        <svg class="bi bi-person" width="2.8em" height="2em" viewBox="0 0 24 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 00.014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 00.022.004zm9.974.056v-.002.002zM8 7a2 2 0 100-4 2 2 0 000 4zm3-2a3 3 0 11-6 0 3 3 0 016 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <p>Doctors Accounts</p>
+                        <span class="caret"></span>
+
+                    </a>
+                </li>
+                <ul class="collapse navigation-submenu" id="acc">
+                    <li>
+                        <a  href="{{ path('users_index') }}"  >Manage Accounts</a>
+                    </li>
+                    <br>
+                </ul>
+
+                <li class="nav-item">
+                    <a href="{{  path('invoices') }}">
+                        <svg lass="bi bi-person" width="2.8em" height="2em" viewBox="0 0 24 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M0 2A1.5 1.5 0 0 1 1.5.5h11A1.5 1.5 0 0 1 14 2v12a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 0 14V2zm1.5-.5A.5.5 0 0 0 1 2v12a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5V2a.5.5 0 0 0-.5-.5h-11z"/>
+                            <path fill-rule="evenodd" d="M15.5 3a.5.5 0 0 1 .5.5V14a1.5 1.5 0 0 1-1.5 1.5h-3v-1h3a.5.5 0 0 0 .5-.5V3.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M2 3h10v2H2V3zm0 3h4v3H2V6zm0 4h4v1H2v-1zm0 2h4v1H2v-1zm5-6h2v1H7V6zm3 0h2v1h-2V6zM7 8h2v1H7V8zm3 0h2v1h-2V8zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1z"/>
+                        </svg>
+                        <p>Manage Invoices</p>
+
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="main-panel">
+        <div class="content">
+            <div class="container-fluid">
+                <h1>Rejection Of Medical Informations </h1>
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
+            </div>
+    </div>
+    </div>
+
+
+
+
+    </body>
+{% endblock %}
+
+

@@ -1,0 +1,17 @@
+{% extends 'emailtemp.html.twig' %}
+{% block head_css %}
+    <link rel="stylesheet" href="{{ asset('medicalcenter/assets/css/bootstrap.min.css') }}">{% endblock %}
+{% block title %}Request{% endblock %}
+
+{% block test %}
+
+    <h2>Request Confirmation</h2>
+
+    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;"> Hello {{ name }},</p>
+    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;"> We acknowledge receipt of your request and thank you for your trust.</p>
+    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Click on the link below to Confirm your request by submitting the form.</p>
+    <p  class="btn btn-primary" role="button" style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;"> <a href="{{'http://localhost:8000/patient/info/'~email~'/'~id}}">Click here to Confirm your request</a></p>
+    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;" >Looking forward to hearing from you, sincere greetings</p>
+{% endblock %}
+
+
